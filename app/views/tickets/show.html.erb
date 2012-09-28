@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ticket.name %>
+</p>
+
+<p>
+  <b>Problem:</b>
+  <%= @ticket.problem %>
+</p>
+
+
+
+<% @ticket.checkbox_results.keys.each do |field| %>
+    <li><%= field %></li>
+<% end %>
+
+<table style="border: solid; border-bottom: solid; border-left: solid;">
+  <thead>
+  <tr>
+    <% @ticket.textbox_results.keys.each do |field| %>
+        <th style="border: solid; border-bottom: solid; border-left: solid;"><%= field %></th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <% @ticket.textbox_results.values.each do |field| %>
+        <td><%= if field then field else "NA" end %></td>
+    <% end %>
+  </tr>
+  </tbody>
+</table>
+
+
+<%# (@ticket.textbox_results.merge @ticket.checkbox_results).to_a %>
+
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Back', tickets_path %>

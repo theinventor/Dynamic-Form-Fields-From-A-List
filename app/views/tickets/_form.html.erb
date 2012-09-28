@@ -1,0 +1,24 @@
+<%= simple_form_for(@ticket) do |f| %>
+
+    <%= f.input :name %>
+
+    <%= f.input :problem %>
+
+    <% CHECKBOXES.each do |field| %>
+        <p>
+          <%= label_tag field %>
+          <%= "<input type=\"checkbox\" name=\"ticket_checkboxes[#{field}]\" #{"checked=checked" if @ticket.checkbox_results.to_hash.from_keys(field).values == ["on"]}".html_safe %>
+        </p>
+    <% end %>
+
+    <% TEXTFIELDS.each do |field| %>
+        <p>
+          <%= label_tag field %>
+          <%= "<input type=\"text\" name=\"ticket_textfields[#{field}]\" value=\"#{ @ticket.textbox_results.to_hash.from_keys(field).values[0] }\"".html_safe %>
+        </p>
+    <% end %>
+
+    <p>&nbsp;</p>
+    <%= f.submit %>
+
+<% end %>
